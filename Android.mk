@@ -1,6 +1,6 @@
 BASE_DIR := $(call my-dir)
 
-NODE_DIR ?= external/node
+NODE_DIR ?= external/nodejs
 
 include $(BASE_DIR)/Android.http_parser.mk
 include $(BASE_DIR)/Android.libuv.mk
