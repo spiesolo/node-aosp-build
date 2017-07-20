@@ -116,7 +116,7 @@ $(GEN): INTERMEDIATES := $(intermediates)/node_javascript.cc
 $(GEN):
 	@echo "Generating $@"
 	@mkdir -p $(dir $@)
-	cd $(LOCAL_PATH) && python $(SCRIPT) $(TOPDIR)$(INTERMEDIATES) $(LOCAL_JS_LIBRARY_FILES) config src/notrace_macros.py src/nolttng_macros.py src/perfctr_macros.py
+	cd $(LOCAL_PATH) && python $(SCRIPT) $(TOPDIR)$(INTERMEDIATES) $(LOCAL_JS_LIBRARY_FILES) config.gypi src/notrace_macros.py src/nolttng_macros.py src/perfctr_macros.py
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/src \
@@ -219,6 +219,6 @@ LOCAL_SHARED_LIBRARIES := \
 	$(NODE_EXTRA_SHARED_LIBRARIES)
 
 LOCAL_CPPFLAGS := -std=gnu++0x
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 LOCAL_CPP_EXTENSION := .cc
 include $(BUILD_EXECUTABLE)

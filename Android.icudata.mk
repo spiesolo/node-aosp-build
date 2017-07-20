@@ -21,7 +21,7 @@ GEN := $(intermediates)/icusmdt58.dat
 $(GEN): SCRIPT := $(intermediates)/icutrim.py
 $(GEN): TMPDIR := $(intermediates)/tmp
 $(GEN): LOCAL_PATH := $(LOCAL_PATH)
-$(GEN): $(SCRIPT)
+$(GEN): $(intermediates)/icutrim.py
 	@echo "Generating icusmdt58.dat"
 	@mkdir -p $(TMPDIR)
 	python $(SCRIPT) -D $(LOCAL_PATH)/source/data/in/icudt58l.dat --delete-tmp -T $(TMPDIR) -F $(LOCAL_PATH)/../../tools/icu/icu_small.json -O icusmdt581.dat
@@ -35,8 +35,8 @@ ICUPKG := $(BUILD_OUT_EXECUTABLES)/icupkg$(BUILD_EXECUTABLE_SUFFIX)
 # Generate icusmdt58_dat.c
 GEN := $(intermediates)/icusmdt58_dat.c
 $(GEN): ICUSMDT51_DAT := $(intermediates)/icusmdt58.dat
-$(GEN): $(GENCCODE) $(GENRB) $(ICULSLOCS) $(ICUPKG) $(ICUSMDT51_DAT)
-$(GEN):
+$(GEN): $(GENCCODE) $(GENRB) $(ICULSLOCS) $(ICUPKG)
+$(GEN): $(intermediates)/icusmdt58.dat
 	@echo "Generating icusmdt58_dat.c"
 	@mkdir -p $(dir $@)
 	$(GENCCODE) -d $(dir $@) $(ICUSMDT51_DAT)
@@ -46,6 +46,6 @@ LOCAL_GENERATED_SOURCES += $(intermediates)/icusmdt58_dat.c
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/source/common
 
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 
 include $(BUILD_STATIC_LIBRARY)

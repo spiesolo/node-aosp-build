@@ -127,7 +127,7 @@ LOCAL_SRC_FILES := \
         source/i18n/zrule.cpp source/i18n/ztrans.cpp
 
 include abi/cpp/use_rtti.mk
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 
 include $(BUILD_STATIC_LIBRARY)
 

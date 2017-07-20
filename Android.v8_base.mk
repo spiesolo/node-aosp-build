@@ -437,6 +437,6 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../icu-small/source/common
 
 LOCAL_CPPFLAGS := -std=gnu++0x
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 LOCAL_CPP_EXTENSION := .cc
 include $(BUILD_STATIC_LIBRARY)

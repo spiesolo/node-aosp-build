@@ -33,6 +33,6 @@ LOCAL_SRC_FILES := \
     src/base/utils/random-number-generator.cc
 
 LOCAL_CPPFLAGS := -std=gnu++0x
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 LOCAL_CPP_EXTENSION := .cc
 include $(BUILD_STATIC_LIBRARY)

@@ -25,6 +25,6 @@ LOCAL_SRC_FILES := \
     src/libplatform/task-queue.cc \
     src/libplatform/worker-thread.cc
 
-include external/stlport/libstlport.mk
+include $(BASE_DIR)/Android.cxxstl.mk
 LOCAL_CPP_EXTENSION := .cc
 include $(BUILD_STATIC_LIBRARY)
