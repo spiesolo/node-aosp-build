@@ -1,8 +1,10 @@
 # node-aosp-build
 
-Android build scripts made for nodejs v6.10.3.
+Includes a set of Android build scripts made to build nodejs v6.10.3
+under AOSP SDK.
 
-Below are patches need to be applied to nodejs v6.10.3.
+Below are patches need to be applied to nodejs v6.10.3, to support
+STLport library in AOSP L or older versions:
 
 ```
 diff --git a/deps/v8/include/v8.h b/deps/v8/include/v8.h
@@ -25,7 +27,7 @@ index ecd5b12..a76b714 100644
  #ifdef USE_TR1_TYPE_TRAITS
  template <typename T> using remove_reference = std::tr1::remove_reference<T>;
  #else
-+#ifdef ANDROID
++#ifdef USE_STLPORT
 +template <typename T> using remove_reference = std::tr1::remove_reference<T>; // stlport use tr1
 +#else
  template <typename T> using remove_reference = std::remove_reference<T>;
@@ -36,3 +38,22 @@ index ecd5b12..a76b714 100644
    (node::OneByteString((isolate), (string), sizeof(string) - 1))
 ```
 
+To build, nodejs needs to be configured firstly, as the generated
+config.gypi is also part of the build source. Use below command to do that:
+
+
+```
+./configure \
+        --prefix=/system \
+        --dest-cpu=arm \
+        --dest-os=android \
+        --without-snapshot \
+        --without-inspector \
+        --without-dtrace \
+        --without-etw \
+        --without-perfctr \
+        --shared-http-parser \
+        --shared-libuv \
+        --shared-openssl \
+        --shared-zlib
+```
